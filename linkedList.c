@@ -170,10 +170,15 @@ void list_sort(list* l,compareFunc comp,swapFunc swap){
  */
 value list_pop(list *l){
 	list_lock(l);
+	value v;
 	node_pos n=l->head->next;
-	char* v=n->value;
-	l->head->next=n->next;
-	if(n!=NULL)free(n);
+	if(n!=NULL){
+		v=n->value;
+		l->head->next=n->next;
+		if(n!=NULL)free(n);
+	}else{
+		v=NULL;
+	}
 	list_unlock(l);
 	return v;
 }
