@@ -118,7 +118,7 @@ void waitForThreads(pthread_t tid[]){
 		if(pthread_join(tid[i],NULL)){
 			perror((char*)tid[i]);
 		}
-	}
+	    }
 }
 void broadcastEnd(void){
 	running=0;
