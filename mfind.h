@@ -1,14 +1,21 @@
 #include <pthread.h>
 #include <dirent.h>
-void checkOptions(int,char**);
+typedef struct mfindData{
+	int nrthrd;
+	char type;
+	char *filename;
+}data;
+data* initializeData(char*);
+void freeData(data*);
+void checkOptions(int,char**,data*);
 void* traverseFolders(void*);
-void addFoldersToList(int,char**);
-void startThreads(pthread_t[]);
-void waitForThreads(pthread_t[]);
-void waitCheck(void);
-void openDirectory(void);
+void addFoldersToList(int,char**,data*);
+void startThreads(pthread_t[],data*);
+void waitForThreads(pthread_t[],data*);
+void waitCheck(data*);
+void openDirectory(data*);
 void broadcastEnd(void);
 void awaitBroadcast(void);
-void checkDirEntry(char*,struct dirent*);
-int checkFileName(char*,struct dirent*);
+void checkDirEntry(char*,struct dirent*,data*);
+int checkFileName(char*,struct dirent*,data*);
 int checkType(struct dirent*,char);
